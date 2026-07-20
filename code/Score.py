@@ -143,9 +143,8 @@ class Score:
 
             # Pontuação amarela
             self.score_text(
-                20,
-                f'{name}              {score:05d}            {date}',
-                C_YELLOW,
+                16,
+                f'{name}              {score:05d}            {date}',  C_YELLOW,
                 SCORE_POS[list_score.index(player_score)]
             )
 

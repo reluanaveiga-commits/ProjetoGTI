@@ -264,20 +264,20 @@ WIN_HEIGHT = 324
 
 SCORE_POS = {
 
-    'Title': (WIN_WIDTH / 2, 60),
-    'EnterName': (WIN_WIDTH / 2, 110),
-    'Label': (WIN_WIDTH / 2, 120),
-    'Name': (WIN_WIDTH / 2, 130),
+    'Title': (WIN_WIDTH / 2, 40),
+    'EnterName': (WIN_WIDTH / 2, 85),
+    'Label': (WIN_WIDTH / 2, 110),
+    'Name': (WIN_WIDTH / 2, 135),
 
-    0: (WIN_WIDTH / 2, 200),
-    1: (WIN_WIDTH / 2, 230),
-    2: (WIN_WIDTH / 2, 260),
-    3: (WIN_WIDTH / 2, 290),
-    4: (WIN_WIDTH / 2, 320),
-    5: (WIN_WIDTH / 2, 350),
-    6: (WIN_WIDTH / 2, 380),
-    7: (WIN_WIDTH / 2, 410),
-    8: (WIN_WIDTH / 2, 440),
-    9: (WIN_WIDTH / 2, 470),
+    0: (WIN_WIDTH / 2, 165),
+    1: (WIN_WIDTH / 2, 185),
+    2: (WIN_WIDTH / 2, 205),
+    3: (WIN_WIDTH / 2, 225),
+    4: (WIN_WIDTH / 2, 245),
+    5: (WIN_WIDTH / 2, 265),
+    6: (WIN_WIDTH / 2, 285),
+    7: (WIN_WIDTH / 2, 305),
+    8: (WIN_WIDTH / 2, 325),
+    9: (WIN_WIDTH / 2, 345),
 
 }
