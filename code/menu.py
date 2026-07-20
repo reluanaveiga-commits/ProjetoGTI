@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import pygame
 import pygame.image
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import WIN_WIDTH, C_ORANGE, MENU_OPTION, C_WHITE, C_YELLOW
+from code.Const import WIN_WIDTH, WIN_HEIGHT, C_ORANGE, MENU_OPTION, C_WHITE, C_YELLOW
 
 
 class Menu:
@@ -23,58 +24,106 @@ class Menu:
             # Desenha a imagem de fundo
             self.window.blit(source=self.surf, dest=self.rect)
 
+            # Título
             self.menu_text(
                 text_size=42,
                 text="Guardião",
                 text_color=C_ORANGE,
-                text_center_pos=((WIN_WIDTH / 2), 70)
+                text_center_pos=(WIN_WIDTH / 2, 70)
             )
 
             self.menu_text(
                 text_size=42,
                 text="da Floresta",
                 text_color=C_ORANGE,
-                text_center_pos=((WIN_WIDTH / 2), 120)
+                text_center_pos=(WIN_WIDTH / 2, 120)
             )
 
+            # Opções do menu
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:
                     self.menu_text(
                         text_size=20,
                         text=MENU_OPTION[i],
                         text_color=C_YELLOW,
-                        text_center_pos=((WIN_WIDTH / 2), 200 + 25 * i)
+                        text_center_pos=(WIN_WIDTH / 2, 200 + 25 * i)
                     )
                 else:
                     self.menu_text(
                         text_size=20,
                         text=MENU_OPTION[i],
                         text_color=C_WHITE,
-                        text_center_pos=((WIN_WIDTH / 2), 200 + 25 * i)
+                        text_center_pos=(WIN_WIDTH / 2, 200 + 25 * i)
                     )
+
+            # ===============================
+            # CONTROLES
+            # ===============================
+
+            self.menu_text(
+                text_size=22,
+                text="CONTROLES",
+                text_color=C_YELLOW,
+                text_center_pos=(120, WIN_HEIGHT - 150)
+            )
+
+            self.menu_text(
+                text_size=18,
+                text="← / →  - Mover",
+                text_color=C_WHITE,
+                text_center_pos=(120, WIN_HEIGHT - 120)
+            )
+
+            self.menu_text(
+                text_size=18,
+                text="SPACE - Pular",
+                text_color=C_WHITE,
+                text_center_pos=(120, WIN_HEIGHT - 95)
+            )
+
+            self.menu_text(
+                text_size=18,
+                text="Z - Atirar",
+                text_color=C_WHITE,
+                text_center_pos=(120, WIN_HEIGHT - 70)
+            )
+
+            self.menu_text(
+                text_size=18,
+                text="SHIFT - Correr",
+                text_color=C_WHITE,
+                text_center_pos=(120, WIN_HEIGHT - 45)
+            )
+
+            self.menu_text(
+                text_size=18,
+                text="ENTER - Selecionar",
+                text_color=C_WHITE,
+                text_center_pos=(145, WIN_HEIGHT - 20)
+            )
 
             pygame.display.flip()
 
             # Verifica todos os eventos
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.quit()  # Fecha a janela
-                    quit()         # Encerra o jogo
+                    pygame.quit()
+                    quit()
 
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_DOWN:  # Tecla para baixo
+                    if event.key == pygame.K_DOWN:
                         if menu_option < len(MENU_OPTION) - 1:
                             menu_option += 1
                         else:
                             menu_option = 0
 
-                    if event.key == pygame.K_UP:  # Tecla para cima
+                    if event.key == pygame.K_UP:
                         if menu_option > 0:
                             menu_option -= 1
                         else:
                             menu_option = len(MENU_OPTION) - 1
 
-                    if event.key == pygame.K_RETURN:  # Tecla Enter
+                    if event.key == pygame.K_RETURN:
                         return MENU_OPTION[menu_option]
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):

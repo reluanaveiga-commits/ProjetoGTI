@@ -24,7 +24,7 @@ class Player(Entity):
         self.gravity = 1
         self.jump_force = 15
         self.on_ground = False
-        self.direction = 1
+
 
 
 
@@ -47,7 +47,7 @@ class Player(Entity):
 
             self.rect.x -= speed
 
-            self.direction = -1
+
 
 
 
@@ -55,7 +55,7 @@ class Player(Entity):
 
             self.rect.x += speed
 
-            self.direction = 1
+
 
 
 
@@ -84,29 +84,21 @@ class Player(Entity):
 
             self.on_ground = True
 
-
-
-
     def shot(self):
 
         self.shot_delay -= 1
-
 
         if self.shot_delay <= 0:
 
             pressed_keys = pygame.key.get_pressed()
 
-
             if pressed_keys[pygame.K_z]:
-
                 self.shot_delay = ENTITY_SHOT_DELAY[self.name]
-
 
                 return PlayerShot(
                     name=f'{self.name}Shot',
                     position=(
-                        self.rect.centerx,
-                        self.rect.centery
-                    ),
-                    direction=self.direction
+                        self.rect.right - 5,
+                        self.rect.top + 18
+                    )
                 )

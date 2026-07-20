@@ -8,11 +8,20 @@ import pygame
 # CORES
 # ===========================
 
-C_WHITE = (245, 245, 245)
-C_ORANGE = (255, 140, 0)
-C_YELLOW = (255, 215, 0)
-C_GREEN = (34, 177, 76)
-C_CYAN = (0, 200, 200)
+# Cores básicas
+C_WHITE  = (255, 255, 255)
+C_BLACK  = (0, 0, 0)
+
+# Interface (HUD)
+C_RED    = (220, 40, 40)      # Vida
+C_GOLD   = (255, 215, 0)      # Pontuação
+C_GREEN  = (0, 220, 0)        # FPS
+C_CYAN   = (0, 220, 220)      # Informações
+C_YELLOW = (255, 255, 0)      # Destaques
+C_ORANGE = (255, 140, 0)      # Títulos
+
+# Sombra do texto
+C_SHADOW = (30, 30, 30)
 
 
 # ===========================
@@ -31,7 +40,7 @@ EVENT_ENEMY = pygame.USEREVENT + 2
 ENTITY_SPEED = {
 
     # Cenários
-    'Level1Bg0': 1,
+    'Level1Bg0': 0,
     'Level1Bg1': 1,
     'Level1Bg2': 1,
     'Level1Bg3': 1,

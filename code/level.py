@@ -13,7 +13,7 @@ from code.Const import (
     C_WHITE,
     C_GREEN,
     TIMEOUT_LEVEL,
-    SPAWM_TIME
+    SPAWM_TIME, C_RED, C_GOLD, C_BLACK
 )
 
 from code.EntityMediator import EntityMediator
@@ -175,7 +175,7 @@ class Level:
                     self.level_text(
                         text_size=18,
                         text=f'Vida: {ent.health}  Pontos: {ent.score}',
-                        text_color=C_GREEN,
+                        text_color=C_GOLD,
                         text_pos=(10, 10)
                     )
 
@@ -264,17 +264,13 @@ class Level:
             self.level_text(
                 text_size=14,
                 text=f'FPS: {clock.get_fps():.0f}',
-                text_color=C_WHITE,
+                text_color=C_GREEN,
                 text_pos=(10, WIN_HEIGHT - 30)
             )
 
 
 
             pygame.display.flip()
-
-
-
-
 
     def level_text(
             self,
@@ -283,25 +279,40 @@ class Level:
             text_color: tuple,
             text_pos: tuple):
 
-
         text_font: Font = pygame.font.SysFont(
             'Arial',
-            text_size
+            text_size,
+            bold=True
         )
 
+        # Sombra do texto
+        shadow_surf: Surface = text_font.render(
+            text,
+            True,
+            C_BLACK
+        ).convert_alpha()
 
+        shadow_rect: Rect = shadow_surf.get_rect(
+            left=text_pos[0] + 2,
+            top=text_pos[1] + 2
+        )
+
+        self.window.blit(
+            source=shadow_surf,
+            dest=shadow_rect
+        )
+
+        # Texto principal
         text_surf: Surface = text_font.render(
             text,
             True,
             text_color
         ).convert_alpha()
 
-
         text_rect: Rect = text_surf.get_rect(
             left=text_pos[0],
             top=text_pos[1]
         )
-
 
         self.window.blit(
             source=text_surf,
