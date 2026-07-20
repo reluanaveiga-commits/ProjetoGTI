@@ -7,6 +7,7 @@ from code.Const import WIN_WIDTH, WIN_HEIGHT
 from code.background import Background
 from code.enemy import Enemy
 from code.player import Player
+from code.Obstacle import Obstacle
 
 
 class EntityFactory:
@@ -21,6 +22,7 @@ class EntityFactory:
                 list_bg = []
 
                 for i in range(4):
+
                     list_bg.append(
                         Background(
                             f'Level1Bg{i}',
@@ -43,6 +45,7 @@ class EntityFactory:
                 list_bg = []
 
                 for i in range(4):
+
                     list_bg.append(
                         Background(
                             f'Level2Bg{i}',
@@ -102,6 +105,23 @@ class EntityFactory:
                     else (
                         WIN_WIDTH - 100,
                         WIN_HEIGHT - 100
+                    )
+                )
+
+
+            case 'Obstacle1':
+
+                obstacle_list = [
+                    'ObstacleTree',
+                    'ObstacleTree1',
+                    'ObstacleTree2'
+                ]
+
+                return Obstacle(
+                    random.choice(obstacle_list),
+                    (
+                        WIN_WIDTH,
+                        WIN_HEIGHT - 40
                     )
                 )
 

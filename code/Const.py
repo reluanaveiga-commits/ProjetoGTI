@@ -3,26 +3,24 @@
 
 import pygame
 
-
 # ===========================
 # CORES
 # ===========================
 
 # Cores básicas
-C_WHITE  = (255, 255, 255)
-C_BLACK  = (0, 0, 0)
+C_WHITE = (255, 255, 255)
+C_BLACK = (0, 0, 0)
 
 # Interface (HUD)
-C_RED    = (220, 40, 40)      # Vida
-C_GOLD   = (255, 215, 0)      # Pontuação
-C_GREEN  = (0, 220, 0)        # FPS
-C_CYAN   = (0, 220, 220)      # Informações
-C_YELLOW = (255, 255, 0)      # Destaques
-C_ORANGE = (255, 140, 0)      # Títulos
+C_RED = (220, 40, 40)  # Vida
+C_GOLD = (255, 215, 0)  # Pontuação
+C_GREEN = (0, 220, 0)  # FPS
+C_CYAN = (0, 220, 220)  # Informações
+C_YELLOW = (255, 255, 0)  # Destaques
+C_ORANGE = (255, 140, 0)  # Títulos
 
 # Sombra do texto
 C_SHADOW = (30, 30, 30)
-
 
 # ===========================
 # EVENTOS
@@ -30,8 +28,6 @@ C_SHADOW = (30, 30, 30)
 
 EVENT_TIMEOUT = pygame.USEREVENT + 1
 EVENT_ENEMY = pygame.USEREVENT + 2
-
-
 
 # ===========================
 # VELOCIDADE DAS ENTIDADES
@@ -50,32 +46,31 @@ ENTITY_SPEED = {
     'Level2Bg2': 1,
     'Level2Bg3': 1,
 
-
     # Jogador
     'Player1': 5,
     'Player2': 5,
-
 
     # Tiros
     'Player1Shot': 8,
     'Player2Shot': 8,
 
-
     # Inimigos
     'Enemy1': 2,
     'Enemy2': 2,
 
-
     # Tiros inimigos
     'Enemy1Shot': 5,
     'Enemy2Shot': 5,
+
+    'ObstacleTree': 1,
+    'ObstacleTree1': 1,
+    'ObstacleTree2': 1,
 }
-
-
 
 # ===========================
 # DANO
 # ===========================
+
 
 ENTITY_DAMAGE = {
 
@@ -90,28 +85,34 @@ ENTITY_DAMAGE = {
     'Level2Bg2': 0,
     'Level2Bg3': 0,
 
-
     # Jogador
     'Player1': 10,
     'Player2': 10,
-
 
     # Tiros
     'Player1Shot': 25,
     'Player2Shot': 25,
 
-
     # Inimigos
     'Enemy1': 15,
     'Enemy2': 20,
 
-
     # Tiros inimigos
     'Enemy1Shot': 10,
     'Enemy2Shot': 15,
+
+    # Obstáculos
+    'ObstacleTree': 25,
+    'ObstacleTree1': 25,
+    'ObstacleTree2': 25,
 }
 
+# ===========================
+# OBSTACULO
+# ===========================
 
+OBSTACLE_DELAY = 3000
+OBSTACLE_TIME = 10000
 
 # ===========================
 # TEMPO ENTRE ATAQUES
@@ -125,8 +126,6 @@ ENTITY_SHOT_DELAY = {
     'Enemy1': 100,
     'Enemy2': 120,
 }
-
-
 
 # ===========================
 # VIDA
@@ -145,42 +144,38 @@ ENTITY_HEALTH = {
     'Level2Bg2': 999,
     'Level2Bg3': 999,
 
-
     # Jogador
     'Player1': 100,
     'Player2': 100,
-
 
     # Tiros
     'Player1Shot': 1,
     'Player2Shot': 1,
 
-
     # Inimigos
     'Enemy1': 50,
     'Enemy2': 70,
 
-
     # Tiros inimigos
     'Enemy1Shot': 1,
     'Enemy2Shot': 1,
+
+    # Obstáculos
+    'ObstacleTree': 1,
+    'ObstacleTree1': 1,
+    'ObstacleTree2': 1,
 }
-
-
 
 # ===========================
 # MENU
 # ===========================
 
 MENU_OPTION = (
-    'Iniciar Jogo',
-    'Modo Cooperativo',
-    'Modo Competitivo',
-    'Pontuação',
-    'Sair'
+    'PLAYER 1',
+    'PLAYER 2',
+    'PONTUAÇÃO',
+    'EXIT'
 )
-
-
 
 # ===========================
 # CONTROLES
@@ -193,7 +188,6 @@ PLAYER_KEY_LEFT = {
 
 }
 
-
 PLAYER_KEY_RIGHT = {
 
     'Player1': pygame.K_RIGHT,
@@ -201,15 +195,12 @@ PLAYER_KEY_RIGHT = {
 
 }
 
-
 PLAYER_KEY_SHOT = {
 
     'Player1': pygame.K_z,
     'Player2': pygame.K_LCTRL,
 
 }
-
-
 
 # ===========================
 # PONTUAÇÃO
@@ -228,29 +219,27 @@ ENTITY_SCORE = {
     'Level2Bg2': 0,
     'Level2Bg3': 0,
 
-
     # Jogador
     'Player1': 0,
     'Player2': 0,
-
 
     # Tiros
     'Player1Shot': 0,
     'Player2Shot': 0,
 
-
     # Inimigos
     'Enemy1': 100,
     'Enemy2': 150,
-
 
     # Tiros inimigos
     'Enemy1Shot': 0,
     'Enemy2Shot': 0,
 
+    # Obstáculos
+    'ObstacleTree': 0,
+    'ObstacleTree1': 0,
+    'ObstacleTree2': 0,
 }
-
-
 
 # ===========================
 # SPAWN / TEMPO
@@ -262,8 +251,6 @@ TIMEOUT_LEVEL = 30000
 
 TIMEOUT_STEP = 100
 
-
-
 # ===========================
 # TELA
 # ===========================
@@ -271,28 +258,26 @@ TIMEOUT_STEP = 100
 WIN_WIDTH = 576
 WIN_HEIGHT = 324
 
-
-
 # ===========================
 # POSIÇÃO DO SCORE
 # ===========================
 
 SCORE_POS = {
 
-    'Title': (WIN_WIDTH / 2, 50),
-    'EnterName': (WIN_WIDTH / 2, 80),
-    'Label': (WIN_WIDTH / 2, 90),
-    'Name': (WIN_WIDTH / 2, 110),
+    'Title': (WIN_WIDTH / 2, 60),
+    'EnterName': (WIN_WIDTH / 2, 110),
+    'Label': (WIN_WIDTH / 2, 120),
+    'Name': (WIN_WIDTH / 2, 130),
 
-    0: (WIN_WIDTH / 2, 110),
-    1: (WIN_WIDTH / 2, 110),
-    2: (WIN_WIDTH / 2, 130),
-    3: (WIN_WIDTH / 2, 150),
-    4: (WIN_WIDTH / 2, 170),
-    5: (WIN_WIDTH / 2, 190),
-    6: (WIN_WIDTH / 2, 210),
-    7: (WIN_WIDTH / 2, 230),
-    8: (WIN_WIDTH / 2, 250),
-    9: (WIN_WIDTH / 2, 290),
+    0: (WIN_WIDTH / 2, 200),
+    1: (WIN_WIDTH / 2, 230),
+    2: (WIN_WIDTH / 2, 260),
+    3: (WIN_WIDTH / 2, 290),
+    4: (WIN_WIDTH / 2, 320),
+    5: (WIN_WIDTH / 2, 350),
+    6: (WIN_WIDTH / 2, 380),
+    7: (WIN_WIDTH / 2, 410),
+    8: (WIN_WIDTH / 2, 440),
+    9: (WIN_WIDTH / 2, 470),
 
 }

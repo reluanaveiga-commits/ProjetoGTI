@@ -4,6 +4,7 @@ from code.PlayerShot import PlayerShot
 from code.enemy import Enemy
 from code.entity import Entity
 from code.player import Player
+from code.Obstacle import Obstacle
 
 
 class EntityMediator:
@@ -19,6 +20,15 @@ class EntityMediator:
                 ent.health = 0
 
 
+        # obstáculo saiu da tela
+        if isinstance(ent, Obstacle):
+
+            if ent.rect.right < 0:
+
+                ent.health = 0
+
+
+
         # tiro jogador saiu da tela
         if isinstance(ent, PlayerShot):
 
@@ -27,12 +37,14 @@ class EntityMediator:
                 ent.health = 0
 
 
+
         # tiro inimigo saiu da tela
         if isinstance(ent, EnemyShot):
 
             if ent.rect.left < 0 or ent.rect.right > WIN_WIDTH:
 
                 ent.health = 0
+
 
 
 
@@ -50,7 +62,6 @@ class EntityMediator:
 
                 ent1.health -= ent2.damage
 
-                # inimigo desaparece
                 ent2.health = 0
 
                 ent1.last_dmg = ent2.name
@@ -61,10 +72,36 @@ class EntityMediator:
 
                 ent2.health -= ent1.damage
 
-                # inimigo desaparece
                 ent1.health = 0
 
                 ent2.last_dmg = ent1.name
+
+
+
+
+            # =========================
+            # PLAYER X OBSTACLE
+            # =========================
+
+            elif isinstance(ent1, Player) and isinstance(ent2, Obstacle):
+
+                ent1.health -= ent2.damage
+
+                ent2.health = 0
+
+                ent1.last_dmg = ent2.name
+
+
+
+            elif isinstance(ent1, Obstacle) and isinstance(ent2, Player):
+
+                ent2.health -= ent1.damage
+
+                ent1.health = 0
+
+                ent2.last_dmg = ent1.name
+
+
 
 
 
@@ -92,6 +129,7 @@ class EntityMediator:
 
 
 
+
             # =========================
             # TIRO INIMIGO X PLAYER
             # =========================
@@ -116,6 +154,8 @@ class EntityMediator:
 
 
 
+
+
     @staticmethod
     def __give_score(enemy: Enemy, entity_list: list[Entity]):
 
@@ -129,6 +169,8 @@ class EntityMediator:
 
 
 
+
+
     @staticmethod
     def verify_collision(entity_list: list[Entity]):
 
@@ -136,7 +178,9 @@ class EntityMediator:
 
             entity1 = entity_list[i]
 
+
             EntityMediator.__verify_collision_window(entity1)
+
 
 
             for j in range(i + 1, len(entity_list)):
@@ -151,12 +195,17 @@ class EntityMediator:
 
 
 
+
+
+
     @staticmethod
     def verify_health(entity_list: list[Entity]):
 
         for ent in entity_list[:]:
 
+
             if ent.health <= 0:
+
 
                 if isinstance(ent, Enemy):
 
@@ -164,5 +213,6 @@ class EntityMediator:
                         ent,
                         entity_list
                     )
+
 
                 entity_list.remove(ent)

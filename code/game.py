@@ -38,11 +38,13 @@ class Game:
 
 
 
-            # Iniciar jogo
+            # ===============================
+            # PLAYER 1 OU PLAYER 2
+            # ===============================
+
             if menu_return in [
                 MENU_OPTION[0],
-                MENU_OPTION[1],
-                MENU_OPTION[2]
+                MENU_OPTION[1]
             ]:
 
                 player_score = [0, 0]
@@ -55,6 +57,7 @@ class Game:
                     menu_return,
                     player_score
                 )
+
 
                 level_return = level.run(player_score)
 
@@ -77,6 +80,7 @@ class Game:
                         player_score
                     )
 
+
                     level_return = level.run(player_score)
 
 
@@ -88,7 +92,7 @@ class Game:
 
 
 
-                # Final
+                # Final do jogo
                 if level_return:
 
                     score.save(
@@ -98,15 +102,21 @@ class Game:
 
 
 
-            # Tela de pontuação
-            elif menu_return == MENU_OPTION[3]:
+            # ===============================
+            # SCORE
+            # ===============================
+
+            elif menu_return == MENU_OPTION[2]:
 
                 score.show()
 
 
 
-            # Sair
-            elif menu_return == MENU_OPTION[4]:
+            # ===============================
+            # SAIR
+            # ===============================
+
+            elif menu_return == MENU_OPTION[3]:
 
                 pygame.quit()
                 quit()
